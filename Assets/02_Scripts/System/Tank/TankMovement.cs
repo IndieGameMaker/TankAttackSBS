@@ -9,6 +9,7 @@ namespace TankAttack
 
         private float h, v;
 
+        #region Unity Methods
         private void OnEnable()
         {
             if (_inputManager != null)
@@ -24,7 +25,16 @@ namespace TankAttack
                 _inputManager.OnMoveInput -= Move;
             }
         }
-    
+
+        private void FixedUpdate()
+        {
+            // 이동처리 로직
+            Vector3 moveVelocity = transform.forward * _tankData.moveSpeed * v;
+        }
+        
+        
+        #endregion
+
         public void Init(Tank tank)
         {
             _tankData = tank.TankData;
@@ -36,8 +46,9 @@ namespace TankAttack
         {
             h = moveInput.x;
             v = moveInput.y;
-        
+    
             Debug.Log($"h={h}, v={v}");
         }
     }
 }
+
