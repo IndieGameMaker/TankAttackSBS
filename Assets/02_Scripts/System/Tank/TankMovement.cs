@@ -9,6 +9,11 @@ namespace TankAttack
 
         private float h, v;
         private Rigidbody _rb;
+        
+        // 부드러운 이동처리를 위한 변수 Vector2.SmoothDamp
+        private Vector2 _moveInput;         // 목표값
+        private Vector2 _smoothMoveInput;   // 현재값
+        private Vector2 _currentVelocity;   // 내부적으로 사용하는 변수
 
         #region Unity Methods
         private void OnEnable()
@@ -40,8 +45,15 @@ namespace TankAttack
             Quaternion rot = Quaternion.Euler(0f, h * _tankData.turnSpeed * Time.fixedDeltaTime , 0f);
             _rb.MoveRotation(_rb.rotation * rot);
         }
+
+        private void Update()
+        {
+            SmoothMoveInput();
+        }
         #endregion
 
+
+        #region User Methods
         // Tank 초기화 메서드 : 각종 컴포넌트 데이터 설정
         public void Init(Tank tank)
         {
@@ -60,11 +72,23 @@ namespace TankAttack
 
         private void Move(Vector2 moveInput)
         {
-            h = moveInput.x;
-            v = moveInput.y;
-    
-            Debug.Log($"h={h}, v={v}");
+            // h = moveInput.x;
+            // v = moveInput.y;
+            
+            _moveInput = moveInput;
         }
+        
+        // 부드러운 입력값 처리
+        private void SmoothMoveInput()
+        {
+            // 입력값 보간
+            _smoothMoveInput = Vector2.SmoothDamp(_smoothMoveInput, _moveInput, ref _currentVelocity, _tankData.smoothTime);
+            h = _smoothMoveInput.x;
+            v = _smoothMoveInput.y;
+            
+            Debug.Log($"h={h}, v={v}");            
+        }
+        #endregion
     }
 }
 
