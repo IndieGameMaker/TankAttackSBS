@@ -13,6 +13,11 @@ namespace TankAttack
         
         public static InputManager Instance { get; private set; }
 
+        // 이벤트 정의 (이동/회전, 발사, 스크롤)
+        public event Action<Vector2> OnMoveInput;
+        public event Action<Vector2> OnScrollInput;
+        public event Action OnFireInput;
+        
         private void Awake()
         {
             if (Instance == null)
@@ -30,17 +35,25 @@ namespace TankAttack
             moveAction.action.Enable();
 
             moveAction.action.performed += OnTankMove;
+            moveAction.action.canceled += OnTankMove;
         }
         private void OnDisable()
         {
             moveAction.action.Disable();
             
             moveAction.action.performed -= OnTankMove;
+            moveAction.action.canceled -= OnTankMove;
         }
 
         private void OnTankMove(InputAction.CallbackContext ctx)
         {
-            Debug.Log(ctx.ReadValue<Vector2>());
+            if (ctx.phase == InputActionPhase.Canceled)
+            {
+                OnMoveInput?.Invoke(Vector2.zero);
+                return;
+            }            
+            
+            OnMoveInput?.Invoke(ctx.ReadValue<Vector2>());
         }
     }
 }
