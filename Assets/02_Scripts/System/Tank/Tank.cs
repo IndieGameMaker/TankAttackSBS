@@ -5,32 +5,34 @@
  * - TankHealth
  */
 
-using TankAttack;
 using UnityEngine;
 
-public class Tank : MonoBehaviour
+namespace TankAttack
 {
-    [SerializeField] private TankData _tankData;
-    
-    private InputManager _inputManager;
-    private TankMovement _movement;
-    
-    // 프로퍼티 선언
-    public TankData TankData => _tankData;
-    public InputManager Input => _inputManager;
-
-    private void Start()
+    public class Tank : MonoBehaviour
     {
-        InitComponents();
-    }
+        [SerializeField] private TankData _tankData;
     
-    private void InitComponents()
-    {
-        _inputManager = InputManager.Instance;
-        _movement = GetComponent<TankMovement>();
+        private InputManager _inputManager;
+        private TankMovement _movement;
+    
+        // 프로퍼티 선언
+        public TankData TankData => _tankData;
+        public InputManager Input => _inputManager;
 
-        // Dependence Injection Method
-        _movement.Init(this);
+        private void Start()
+        {
+            InitComponents();
+        }
+    
+        private void InitComponents()
+        {
+            _inputManager = InputManager.Instance;
+            _movement = GetComponent<TankMovement>();
+
+            // Dependence Injection Method
+            _movement.Init(this);
         
+        }
     }
 }
