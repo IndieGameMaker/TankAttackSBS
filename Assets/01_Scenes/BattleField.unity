@@ -2418,6 +2418,7 @@ GameObject:
   - component: {fileID: 2069754852}
   - component: {fileID: 2069754854}
   - component: {fileID: 2069754853}
+  - component: {fileID: 2069754855}
   m_Layer: 0
   m_Name: Tank
   m_TagString: Untagged
@@ -2498,6 +2499,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Tank
   _tankData: {fileID: 11400000, guid: 8bdea7a534709483cb8e241a263d07ba, type: 2}
+--- !u!114 &2069754855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2069754850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5aa0251f2bfd94bdd9eed5d48fc9f0d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TankAttack.TankTurret
+  _turretTr: {fileID: 2069524434}
+  _cannonTr: {fileID: 2069524432}
 --- !u!1 &2069754864
 GameObject:
   m_ObjectHideFlags: 0
