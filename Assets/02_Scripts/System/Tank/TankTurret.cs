@@ -33,6 +33,18 @@ namespace TankAttack
             //Ray 생성
             Ray ray = _mainCamera.ScreenPointToRay(screenPoint);
             Debug.DrawRay(ray.origin, ray.direction * 100.0f, Color.green);
+
+            if (Physics.Raycast(ray, out RaycastHit hit, _tankData.maxDistance, 1 << 8))
+            {
+                // 타겟 검출 되었을 때
+                _uiManager.SetDetectTarget(true);
+                _uiManager.SetTargetDistance(hit.distance);
+            }
+            else
+            {
+                _uiManager.SetDetectTarget(false);
+                _uiManager.SetTargetDistance(0);
+            }
         }
     }
 }
