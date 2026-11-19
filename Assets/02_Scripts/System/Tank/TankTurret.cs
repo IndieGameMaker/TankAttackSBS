@@ -6,12 +6,15 @@ namespace TankAttack
     {
         [SerializeField] private Transform _turretTr;
         [SerializeField] private Transform _cannonTr;
+        [SerializeField] private LayerMask _enemyLayer;
         
         private TankData _tankData;
         private InputManager _inputManager;
         private UIManager _uiManager;
 
         private Camera _mainCamera;
+        // 타겟 조준이후 흘러간 누적 시간
+        private float recenterPassedTime;
         
         public void Init(Tank tank, UIManager uiManager)
         {
@@ -34,7 +37,7 @@ namespace TankAttack
             Ray ray = _mainCamera.ScreenPointToRay(screenPoint);
             Debug.DrawRay(ray.origin, ray.direction * 100.0f, Color.green);
 
-            if (Physics.Raycast(ray, out RaycastHit hit, _tankData.maxDistance, 1 << 8))
+            if (Physics.Raycast(ray, out RaycastHit hit, _tankData.maxDistance, _enemyLayer))
             {
                 // 타겟 검출 되었을 때
                 _uiManager.SetDetectTarget(true);
@@ -42,11 +45,19 @@ namespace TankAttack
                 
                 // 타겟 방향으로 터렛 회전
                 RotateTurret(hit.point);
+                recenterPassedTime = 0.0f;
             }
             else
             {
                 _uiManager.SetDetectTarget(false);
                 _uiManager.SetTargetDistance(0);
+                
+                // 일정시간 Delay 후 포신을 중앙으로 회전
+                recenterPassedTime += Time.deltaTime;
+                if (recenterPassedTime > _tankData.recenterDelayTime)
+                {
+                    RotateTurret(transform.position + transform.forward * 10.0f);
+                }
             }
         }
 

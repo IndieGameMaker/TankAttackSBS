@@ -11,4 +11,5 @@ public class TankData : ScriptableObject
     
     [Header("Turret Stats")]
     public float turretRotateSpeed = 20.0f;
+    public float recenterDelayTime = 2.0f;
 }
