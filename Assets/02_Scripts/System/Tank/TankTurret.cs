@@ -38,7 +38,10 @@ namespace TankAttack
             {
                 // 타겟 검출 되었을 때
                 _uiManager.SetDetectTarget(true);
-                _uiManager.SetTargetDistance(hit.distance);
+                _uiManager.SetTargetDistance(Vector3.Distance(hit.point, transform.position));
+                
+                // 타겟 방향으로 터렛 회전
+                RotateTurret(hit.point);
             }
             else
             {
@@ -46,5 +49,21 @@ namespace TankAttack
                 _uiManager.SetTargetDistance(0);
             }
         }
+
+        private void RotateTurret(Vector3 point)
+        {
+            // 타겟을 터렛 기준의 로컬 좌표계로 변환
+            Vector3 targetDir = _turretTr.InverseTransformPoint(point);
+            // Atan2(x, z)
+            float angleY = Mathf.Atan2(targetDir.x, targetDir.z) * Mathf.Rad2Deg;
+            
+            // 터렛 회전
+            _turretTr.Rotate(Vector3.up * angleY * _tankData.turretRotateSpeed * Time.deltaTime);
+        }
     }
 }
+
+/*
+ * Mathf.Atan2(x, z)
+ * 
+ */
