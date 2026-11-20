@@ -89,7 +89,7 @@ namespace TankAttack
 
         private void RotateCannon()
         {
-            _cannonTr.Rotate(Vector3.right * _cannonAngle * )
+            _cannonTr.Rotate(Vector3.right * _cannonAngle * _tankData.cannonRotateSpeed * Time.deltaTime);
         }
         #endregion
     }
