@@ -36,6 +36,9 @@ namespace TankAttack
 
             moveAction.action.performed += OnTankMove;
             moveAction.action.canceled += OnTankMove;
+
+            scrollAction.action.performed += OnScroll;
+            scrollAction.action.canceled += OnScroll;
         }
         private void OnDisable()
         {
@@ -43,6 +46,21 @@ namespace TankAttack
             
             moveAction.action.performed -= OnTankMove;
             moveAction.action.canceled -= OnTankMove;
+            
+            scrollAction.action.performed -= OnScroll;
+            scrollAction.action.canceled -= OnScroll;
+        }
+
+        private void OnScroll(InputAction.CallbackContext ctx)
+        {
+            if (ctx.phase == InputActionPhase.Performed)
+            {
+                OnScrollInput?.Invoke(ctx.ReadValue<Vector2>());
+            }
+            else if (ctx.phase == InputActionPhase.Canceled)
+            {
+                OnScrollInput?.Invoke(Vector2.zero);
+            }
         }
 
         private void OnTankMove(InputAction.CallbackContext ctx)

@@ -71,6 +71,11 @@ namespace TankAttack
             // 터렛 회전
             _turretTr.Rotate(Vector3.up * angleY * _tankData.turretRotateSpeed * Time.deltaTime);
         }
+
+        private void ScrollInput(Vector2 vector)
+        {
+            
+        }
     }
 }
 
