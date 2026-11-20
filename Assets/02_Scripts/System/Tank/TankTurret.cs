@@ -95,8 +95,13 @@ namespace TankAttack
             // 360 각도 단위를 -180 ~ 180 변환
             float xAngle = _cannonTr.localEulerAngles.x;
             xAngle = (xAngle > 180) ? xAngle - 360 : xAngle;
-            Debug.Log(xAngle);
             xAngle += _cannonAngle;
+            
+            // 각도 제한
+            xAngle = Mathf.Clamp(xAngle, _tankData.upwardsLimitAngle, _tankData.downwardsLimitAngle);
+            // 회전할 목표각도
+            var targetAngle = Quaternion.Euler(xAngle, _cannonTr.localEulerAngles.y, _cannonTr.localEulerAngles.z);
+            _cannonTr.localRotation = targetAngle;
         }
         #endregion
     }
