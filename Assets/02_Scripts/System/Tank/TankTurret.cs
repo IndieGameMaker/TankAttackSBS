@@ -15,6 +15,8 @@ namespace TankAttack
         private Camera _mainCamera;
         // 타겟 조준이후 흘러간 누적 시간
         private float recenterPassedTime;
+        // 포탑 회전 각도
+        private float _cannonAngle;
         
         public void Init(Tank tank, UIManager uiManager)
         {
@@ -23,13 +25,19 @@ namespace TankAttack
             _uiManager = uiManager;
             
             _mainCamera = Camera.main;
+            
+            // Scroll Wheel 값 이벤트 연결
+            _inputManager.OnScrollInput += ScrollInput;
         }
 
+        #region Unity Callbacks
         private void Update()
         {
             DetectTarget();
         }
-        
+        #endregion
+
+        #region Turret Rotate
         private void DetectTarget()
         {
             Vector2 screenPoint = new Vector2(Screen.width * 0.5f, Screen.height * 0.5f);
@@ -71,11 +79,19 @@ namespace TankAttack
             // 터렛 회전
             _turretTr.Rotate(Vector3.up * angleY * _tankData.turretRotateSpeed * Time.deltaTime);
         }
-
-        private void ScrollInput(Vector2 vector)
+        #endregion
+        
+        #region Cannon Rotate
+        private void ScrollInput(Vector2 scroll)
         {
-            
+            _cannonAngle = scroll.y;
         }
+
+        private void RotateCannon()
+        {
+            _cannonTr.Rotate(Vector3.right * _cannonAngle * )
+        }
+        #endregion
     }
 }
 
