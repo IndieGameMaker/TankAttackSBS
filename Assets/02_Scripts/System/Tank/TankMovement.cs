@@ -85,8 +85,6 @@ namespace TankAttack
             _smoothMoveInput = Vector2.SmoothDamp(_smoothMoveInput, _moveInput, ref _currentVelocity, _tankData.smoothTime);
             h = _smoothMoveInput.x;
             v = _smoothMoveInput.y;
-            
-            Debug.Log($"h={h}, v={v}");            
         }
         #endregion
     }

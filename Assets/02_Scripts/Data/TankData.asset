@@ -14,3 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TankData
   moveSpeed: 20
   turnSpeed: 100
+  smoothTime: 0.5
+  maxDistance: 300
+  turretRotateSpeed: 20
+  recenterDelayTime: 2
+  cannonRotateSpeed: 10

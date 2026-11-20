@@ -34,6 +34,7 @@ namespace TankAttack
         private void Update()
         {
             DetectTarget();
+            RotateCannon();
         }
         #endregion
 
@@ -90,6 +91,12 @@ namespace TankAttack
         private void RotateCannon()
         {
             _cannonTr.Rotate(Vector3.right * _cannonAngle * _tankData.cannonRotateSpeed * Time.deltaTime);
+            // Debug.Log(_cannonTr.localEulerAngles.x);
+            // 360 각도 단위를 -180 ~ 180 변환
+            float xAngle = _cannonTr.localEulerAngles.x;
+            xAngle = (xAngle > 180) ? xAngle - 360 : xAngle;
+            Debug.Log(xAngle);
+            xAngle += _cannonAngle;
         }
         #endregion
     }
