@@ -12,5 +12,10 @@ public class TankData : ScriptableObject
     [Header("Turret Stats")]
     public float turretRotateSpeed = 20.0f;
     public float recenterDelayTime = 2.0f;
+    
+    [Header("Cannon Stats")]
     public float cannonRotateSpeed = 10.0f;
+    public float upwardsLimitAngle = -20.0f;
+    public float downwardsLimitAngle = 10.0f;
+
 }
