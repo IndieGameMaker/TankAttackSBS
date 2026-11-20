@@ -90,7 +90,7 @@ namespace TankAttack
 
         private void RotateCannon()
         {
-            _cannonTr.Rotate(Vector3.right * _cannonAngle * _tankData.cannonRotateSpeed * Time.deltaTime);
+            // _cannonTr.Rotate(Vector3.right * _cannonAngle * _tankData.cannonRotateSpeed * Time.deltaTime);
             // Debug.Log(_cannonTr.localEulerAngles.x);
             // 360 각도 단위를 -180 ~ 180 변환
             float xAngle = _cannonTr.localEulerAngles.x;
@@ -101,7 +101,14 @@ namespace TankAttack
             xAngle = Mathf.Clamp(xAngle, _tankData.upwardsLimitAngle, _tankData.downwardsLimitAngle);
             // 회전할 목표각도
             var targetAngle = Quaternion.Euler(xAngle, _cannonTr.localEulerAngles.y, _cannonTr.localEulerAngles.z);
-            _cannonTr.localRotation = targetAngle;
+            _cannonTr.localRotation = Quaternion.Slerp(_cannonTr.localRotation
+                                                        , targetAngle
+                                                        , _tankData.cannonRotateSpeed * Time.deltaTime);
+            
+            /*
+             * Vector3.Lerp (a, b, t)   t = 0.0f -> a, t = 1.0f -> b, t = 0.5f  -> (a+b)/2
+             * Quaternion.Slerp (a, b, t)
+             */
         }
         #endregion
     }
