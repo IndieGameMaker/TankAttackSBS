@@ -68,6 +68,11 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         Debug.Log("룸 입장 완료");
         Debug.Log(PhotonNetwork.CurrentRoom.Name);
         Debug.Log(PhotonNetwork.CurrentRoom.PlayerCount);
+        
+        // 생성할 위치 좌표
+        Vector3 pos = new Vector3(Random.Range(-100f, 100f), 10.0f, Random.Range(-100f, 100f));
+        // 네트워크 탱크 생성
+        PhotonNetwork.Instantiate(TankPrefabName, pos, Quaternion.identity);
     }
 
     #endregion
