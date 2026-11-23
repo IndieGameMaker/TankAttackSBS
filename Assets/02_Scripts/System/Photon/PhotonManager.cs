@@ -9,6 +9,8 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     [SerializeField] private string _gameVersion = "1.0";
     [SerializeField] private string _nickName = "Zackiller";
     [SerializeField] private byte _maxPlayers = 20;
+    
+    private const string TankPrefabName = "Tank";
 
     private void Awake()
     {
