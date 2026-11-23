@@ -20,6 +20,12 @@ namespace TankAttack
         
         public void Init(Tank tank, UIManager uiManager)
         {
+            if (!tank.IsMine)
+            {
+                this.enabled = false;
+                return;
+            }
+            
             _tankData = tank.TankData;
             _inputManager = tank.Input;
             _uiManager = uiManager;

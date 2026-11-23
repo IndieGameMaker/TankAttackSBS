@@ -27,13 +27,9 @@ namespace TankAttack
         private void Awake()
         {
             if (IsMine) InitLocalPlayer();
-        }
-        
-        private void Start()
-        {
             InitComponents();
         }
-
+        
         private void InitLocalPlayer()
         {
             // 자신의 탱크만 컨트롤하기 위해 InputManager 초기화
