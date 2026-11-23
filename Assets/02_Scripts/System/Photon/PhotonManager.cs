@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using Random = UnityEngine.Random;
 
 public class PhotonManager : MonoBehaviourPunCallbacks
 {
@@ -42,6 +43,29 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
         Debug.Log($"방 입장 실패: {message}");
+        
+        // 방 생성
+        // 룸 옵션 설정
+        RoomOptions ro = new RoomOptions()
+        {
+            IsOpen = true,
+            IsVisible = true,
+            MaxPlayers = _maxPlayers
+        };
+
+        PhotonNetwork.CreateRoom($"Room_{Random.Range(0, 1000):0000}", ro);
+    }
+
+    public override void OnCreatedRoom()
+    {
+        Debug.Log("룸 생성 완료");
+    }
+
+    public override void OnJoinedRoom()
+    {
+        Debug.Log("룸 입장 완료");
+        Debug.Log(PhotonNetwork.CurrentRoom.Name);
+        Debug.Log(PhotonNetwork.CurrentRoom.PlayerCount);
     }
 
     #endregion
