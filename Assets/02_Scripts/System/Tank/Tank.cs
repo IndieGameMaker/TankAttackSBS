@@ -4,6 +4,8 @@
  * - TankWeapon
  * - TankHealth
  */
+
+using System;
 using Photon.Pun;
 using Unity.Cinemachine;
 using UnityEngine;
@@ -30,13 +32,32 @@ namespace TankAttack
             if (IsMine) InitLocalPlayer();
             InitComponents();
         }
-        
+
+        private void Start()
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+
+        private void OnDestroy()
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+
         private void InitLocalPlayer()
         {
             // 자신의 탱크만 컨트롤하기 위해 InputManager 초기화
             _inputManager = InputManager.Instance;
             // 시네머신 카메라 설정
             FindAnyObjectByType<CinemachineCamera>().Follow = transform;
+        }
+
+        private void InitTankIdentity()
+        {
+            // 탱크 이름 설정
+            this.gameObject.name =
+                $"Tank {photonView.Owner.NickName} [{photonView.Owner.ActorNumber}] IsMine: {IsMine}";
         }
         
         private void InitComponents()
