@@ -1179,6 +1179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 840d9716f35834d0a9850731fdc06ec5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TankWeapon
+  _firePos: {fileID: 7585560649617928168}
 --- !u!1 &8891236404934724506
 GameObject:
   m_ObjectHideFlags: 0

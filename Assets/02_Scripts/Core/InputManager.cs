@@ -39,6 +39,8 @@ namespace TankAttack
 
             scrollAction.action.performed += OnScroll;
             scrollAction.action.canceled += OnScroll;
+
+            fireAction.action.performed += OnFire;
         }
         private void OnDisable()
         {
@@ -49,6 +51,13 @@ namespace TankAttack
             
             scrollAction.action.performed -= OnScroll;
             scrollAction.action.canceled -= OnScroll;
+            
+            fireAction.action.performed -= OnFire;
+        }
+
+        private void OnFire(InputAction.CallbackContext ctx)
+        {
+            OnFireInput?.Invoke();
         }
 
         private void OnScroll(InputAction.CallbackContext ctx)

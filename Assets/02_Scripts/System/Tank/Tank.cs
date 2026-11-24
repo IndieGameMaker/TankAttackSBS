@@ -18,6 +18,7 @@ namespace TankAttack
         private InputManager _inputManager;
         private TankMovement _movement;
         private TankTurret _turret;
+        private TankWeapon _weapon;
     
         // 프로퍼티 선언
         public TankData TankData => _tankData;
@@ -42,11 +43,13 @@ namespace TankAttack
         {
             _movement = GetComponent<TankMovement>();
             _turret = GetComponent<TankTurret>();
+            _weapon = GetComponent<TankWeapon>();
 
             // 컴포넌트 초기화
             // Dependence Injection Method
             _movement.Init(this);
             _turret.Init(this, UIManager.Instance);
+            _weapon.Init(this);
         }
     }
 }
