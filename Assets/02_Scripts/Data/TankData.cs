@@ -18,4 +18,10 @@ public class TankData : ScriptableObject
     public float upwardsLimitAngle = -20.0f;
     public float downwardsLimitAngle = 10.0f;
 
+    [Header("Projectile Stats")] 
+    public float cannonForce = 1000.0f;
+    public float cannonDamage = 20.0f;
+    public float reloadTime = 1.0f;
+    public GameObject explosionPrefab;
+
 }
