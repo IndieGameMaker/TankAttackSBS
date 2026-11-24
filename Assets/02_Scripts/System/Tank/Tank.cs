@@ -31,6 +31,7 @@ namespace TankAttack
         {
             if (IsMine) InitLocalPlayer();
             InitComponents();
+            InitTankIdentity();
         }
 
         private void Start()
