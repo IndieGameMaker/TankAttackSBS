@@ -23,5 +23,6 @@ public class TankData : ScriptableObject
     public float cannonDamage = 20.0f;
     public float reloadTime = 1.0f;
     public GameObject explosionPrefab;
+    public GameObject cannonPrefab;
 
 }
