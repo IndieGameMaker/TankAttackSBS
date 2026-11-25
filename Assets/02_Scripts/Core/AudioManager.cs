@@ -38,6 +38,11 @@ namespace TankAttack
             _audioFireSfx.outputAudioMixerGroup = _audioData.audioMixer.FindMatchingGroups(_audioData.fireSfxMG)[0];
             _audioEngineSfx.outputAudioMixerGroup = _audioData.audioMixer.FindMatchingGroups(_audioData.engineSfxMG)[0];
             _audioBGM.outputAudioMixerGroup = _audioData.audioMixer.FindMatchingGroups(_audioData.battleBgmMG)[0];
+            
+            // Loop 설정
+            _audioFireSfx.loop      = false;
+            _audioEngineSfx.loop    = true;
+            _audioBGM.loop          = true;
         }
     }
 }
