@@ -43,6 +43,16 @@ namespace TankAttack
             _audioFireSfx.loop      = false;
             _audioEngineSfx.loop    = true;
             _audioBGM.loop          = true;
+            
+            // 배경음악 재생
+            StartBGM();
+        }
+
+        public void StartBGM()
+        {
+            if (_audioBGM.isPlaying) return;
+            
+            _audioBGM.Play();
         }
     }
 }
