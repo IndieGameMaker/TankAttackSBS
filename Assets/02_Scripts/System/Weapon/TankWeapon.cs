@@ -39,9 +39,9 @@ namespace TankAttack
         {
             if (!_isMine) return;
 
-            Fire(); // 로컬 메서드를 호출
+            // Fire(); // 로컬 메서드를 호출
             // 다른 네트워크 유저의 Fire 호출
-            photonView.RPC(nameof(Fire), RpcTarget.Others);
+            photonView.RPC(nameof(Fire), RpcTarget.AllViaServer);
         }
         
         [PunRPC]
