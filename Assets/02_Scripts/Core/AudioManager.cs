@@ -29,7 +29,15 @@ namespace TankAttack
 
         private void Init()
         {
+            // AudioSource 컴포넌트 생성
+            _audioFireSfx   = this.gameObject.AddComponent<AudioSource>();
+            _audioEngineSfx = this.gameObject.AddComponent<AudioSource>();
+            _audioBGM       = this.gameObject.AddComponent<AudioSource>();
             
+            // AudioSource의 Output 설정
+            _audioFireSfx.outputAudioMixerGroup = _audioData.audioMixer.FindMatchingGroups(_audioData.fireSfxMG)[0];
+            _audioEngineSfx.outputAudioMixerGroup = _audioData.audioMixer.FindMatchingGroups(_audioData.engineSfxMG)[0];
+            _audioBGM.outputAudioMixerGroup = _audioData.audioMixer.FindMatchingGroups(_audioData.battleBgmMG)[0];
         }
     }
 }
