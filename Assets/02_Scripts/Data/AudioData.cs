@@ -11,4 +11,9 @@ public class AudioData : ScriptableObject
     public AudioClip fireSfx;
     public AudioClip engineSfx;
     public AudioClip battleBgm;
+
+    [Header("Audio Mixer Groups")] 
+    public string fireSfxMG = "Master/SFX/Fire";
+    public string engineSfxMG = "Master/SFX/Engine";
+    public string battleBgmMG = "Master/BGM";
 }
