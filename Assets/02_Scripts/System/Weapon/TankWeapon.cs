@@ -1,8 +1,13 @@
+using Photon.Pun;
 using UnityEngine;
 
+/*
+ * RPC (Remote Procedure Call)
+ * 다른 PC에 있는 함수를 호출
+ */
 namespace TankAttack
 {
-    public class TankWeapon : MonoBehaviour
+    public class TankWeapon : MonoBehaviourPun
     {
         [SerializeField] private Transform _firePos;
     
@@ -20,15 +25,26 @@ namespace TankAttack
         private void OnEnable()
         {
             if (!_isMine) return;
-            _inputManager.OnFireInput += Fire;
+            _inputManager.OnFireInput += FireAction;
         }
 
         private void OnDisable()
         {
             if (!_isMine) return;
-            _inputManager.OnFireInput -= Fire;
+            _inputManager.OnFireInput -= FireAction;
         }
 
+        // RPC 호출
+        private void FireAction()
+        {
+            if (!_isMine) return;
+
+            Fire(); // 로컬 메서드를 호출
+            // 다른 네트워크 유저의 Fire 호출
+            photonView.RPC(nameof(Fire), RpcTarget.Others);
+        }
+        
+        [PunRPC]
         private void Fire()
         {
             GameObject cannon = Instantiate(_tankData.cannonPrefab, _firePos.position, _firePos.rotation);
