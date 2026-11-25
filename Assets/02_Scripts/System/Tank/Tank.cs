@@ -34,12 +34,6 @@ namespace TankAttack
             InitTankIdentity();
         }
 
-        private void Start()
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
-
         private void OnDestroy()
         {
             Cursor.lockState = CursorLockMode.None;
@@ -52,6 +46,12 @@ namespace TankAttack
             _inputManager = InputManager.Instance;
             // 시네머신 카메라 설정
             FindAnyObjectByType<CinemachineCamera>().Follow = transform;
+            
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;   
+            
+            // 엔진음 시작
+            AudioManager.Instance.StartEngineSound();
         }
 
         private void InitTankIdentity()

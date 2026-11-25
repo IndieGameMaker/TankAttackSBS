@@ -55,5 +55,13 @@ namespace TankAttack
             _audioBGM.clip = _audioData.battleBgm;
             _audioBGM.Play();
         }
+
+        public void StartEngineSound()
+        {
+            if (_audioEngineSfx.isPlaying) return;
+            
+            _audioEngineSfx.clip = _audioData.engineSfx;
+            _audioEngineSfx.Play();
+        }
     }
 }
