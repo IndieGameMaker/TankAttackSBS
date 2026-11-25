@@ -51,7 +51,8 @@ namespace TankAttack
         public void StartBGM()
         {
             if (_audioBGM.isPlaying) return;
-            
+
+            _audioBGM.clip = _audioData.battleBgm;
             _audioBGM.Play();
         }
     }
