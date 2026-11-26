@@ -21,6 +21,7 @@ namespace TankAttack
         private TankMovement _movement;
         private TankTurret _turret;
         private TankWeapon _weapon;
+        private TankHealth _health;
     
         // 프로퍼티 선언
         public TankData TankData => _tankData;
@@ -32,8 +33,6 @@ namespace TankAttack
             if (IsMine) InitLocalPlayer();
             InitComponents();
             InitTankIdentity();
-            
-             
         }
 
         private void OnDestroy()
@@ -61,6 +60,8 @@ namespace TankAttack
             // 탱크 이름 설정
             this.gameObject.name =
                 $"Tank {photonView.Owner.NickName} [{photonView.Owner.ActorNumber}] IsMine: {IsMine}";
+            // 탱크 Layer 설정
+            gameObject.layer = IsMine ? 0 : LayerMask.NameToLayer("ENEMY");
         }
         
         private void InitComponents()
@@ -68,12 +69,14 @@ namespace TankAttack
             _movement = GetComponent<TankMovement>();
             _turret = GetComponent<TankTurret>();
             _weapon = GetComponent<TankWeapon>();
+            _health = GetComponent<TankHealth>();
 
             // 컴포넌트 초기화
             // Dependence Injection Method
             _movement.Init(this);
             _turret.Init(this, UIManager.Instance);
             _weapon.Init(this);
+            _health.Init(this);
         }
     }
 }
