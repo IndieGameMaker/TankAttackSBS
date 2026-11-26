@@ -67,7 +67,13 @@ namespace TankAttack
         // 이동속도에 따라서 엔진음 Pitch 조절
         public void UpdateEnginePitch(float speed)
         {
-            _audioEngineSfx.pitch = speed;
+            _audioEngineSfx.pitch = Mathf.Lerp(0.5f, 1.2f, speed);
+        }
+        
+        // 포탄 발사 효과음
+        public void PlayFireSfx()
+        {
+            _audioFireSfx.PlayOneShot(_audioData.fireSfx);
         }
     }
 }

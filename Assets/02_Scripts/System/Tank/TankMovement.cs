@@ -50,6 +50,9 @@ namespace TankAttack
             // 회전 처리 로직
             Quaternion rot = Quaternion.Euler(0f, h * _tankData.turnSpeed * Time.fixedDeltaTime, 0f);
             _rb.MoveRotation(_rb.rotation * rot);
+            
+            // 엔진 회전음 조절
+            AudioManager.Instance.UpdateEnginePitch(Mathf.Abs(v));
         }
 
         private void Update()
