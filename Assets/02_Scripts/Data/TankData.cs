@@ -25,4 +25,6 @@ public class TankData : ScriptableObject
     public GameObject explosionPrefab;
     public GameObject cannonPrefab;
 
+    [Header("Health Stats")] 
+    public float maxHp = 100.0f;
 }
