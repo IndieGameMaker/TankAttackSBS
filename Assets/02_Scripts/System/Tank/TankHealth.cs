@@ -15,20 +15,20 @@ namespace TankAttack
             _currHp = _tankData.maxHp;
         }
 
-        public void TakeDamage(float damage)
+        public void TakeDamage(float damage, int actorNumber)
         {
             Debug.Log($"피격: {damage}");
             _currHp -= damage;
 
             if (_currHp <= 0.0f)
             {
-                Die();
+                Die(actorNumber);
             }
         }
 
-        private void Die()
+        private void Die(int actorNumber)
         {
-            Debug.Log("사망");
+            Debug.Log($"사망 : {actorNumber}");
         }
     }
 }
