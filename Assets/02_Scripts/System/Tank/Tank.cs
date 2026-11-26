@@ -61,7 +61,7 @@ namespace TankAttack
             this.gameObject.name =
                 $"Tank {photonView.Owner.NickName} [{photonView.Owner.ActorNumber}] IsMine: {IsMine}";
             // 탱크 Layer 설정
-            gameObject.layer = IsMine ? 0 : LayerMask.NameToLayer("ENEMY");
+            gameObject.layer = IsMine ? 10 : LayerMask.NameToLayer("ENEMY");
         }
         
         private void InitComponents()

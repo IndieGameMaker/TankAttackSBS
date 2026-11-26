@@ -41,16 +41,16 @@ namespace TankAttack
 
             // Fire(); // 로컬 메서드를 호출
             // 다른 네트워크 유저의 Fire 호출
-            photonView.RPC(nameof(Fire), RpcTarget.AllViaServer);
+            photonView.RPC(nameof(Fire), RpcTarget.AllViaServer, photonView.OwnerActorNr);
             
             AudioManager.Instance.PlayFireSfx();
         }
         
         [PunRPC]
-        private void Fire()
+        private void Fire(int actorNumber)
         {
             GameObject cannon = Instantiate(_tankData.cannonPrefab, _firePos.position, _firePos.rotation);
-            cannon.GetComponent<Cannon>().Init(_tankData);
+            cannon.GetComponent<Cannon>().Init(_tankData, actorNumber);
         }
     }
 }
