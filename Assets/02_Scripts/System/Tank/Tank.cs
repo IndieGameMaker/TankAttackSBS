@@ -32,6 +32,8 @@ namespace TankAttack
             if (IsMine) InitLocalPlayer();
             InitComponents();
             InitTankIdentity();
+            
+             
         }
 
         private void OnDestroy()
@@ -46,9 +48,9 @@ namespace TankAttack
             _inputManager = InputManager.Instance;
             // 시네머신 카메라 설정
             FindAnyObjectByType<CinemachineCamera>().Follow = transform;
-            
+
             Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;   
+            Cursor.visible = false;              
             
             // 엔진음 시작
             AudioManager.Instance.StartEngineSound();

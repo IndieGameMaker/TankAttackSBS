@@ -42,6 +42,8 @@ namespace TankAttack
             // Fire(); // 로컬 메서드를 호출
             // 다른 네트워크 유저의 Fire 호출
             photonView.RPC(nameof(Fire), RpcTarget.AllViaServer);
+            
+            AudioManager.Instance.PlayFireSfx();
         }
         
         [PunRPC]
