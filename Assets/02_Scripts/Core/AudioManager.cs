@@ -63,5 +63,11 @@ namespace TankAttack
             _audioEngineSfx.clip = _audioData.engineSfx;
             _audioEngineSfx.Play();
         }
+        
+        // 이동속도에 따라서 엔진음 Pitch 조절
+        public void UpdateEnginePitch(float speed)
+        {
+            _audioEngineSfx.pitch = speed;
+        }
     }
 }
